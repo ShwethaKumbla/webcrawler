@@ -11,8 +11,8 @@ import (
 //flags which are accepted from command line
 var (
 	logPath = flag.String("logpath", "crawler.log", "Log Path")
-	URL     = flag.String("url", "", "provide url path")
-	depth   = flag.Int("depth", 2, "provide the depth to traverse given url")
+	URL     = flag.String("url", "https://www.redhat.com", "provide url path")
+	depth   = flag.Int("depth", 3, "provide the depth to traverse given url")
 )
 
 func main() {

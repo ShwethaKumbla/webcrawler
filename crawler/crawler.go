@@ -58,7 +58,7 @@ func CrawlURLS(URL string, linkDepth int) gotree.Tree {
 	root := gotree.New(URL)
 
 	for links, _ := range Visited {
-		//spilit url by domain
+		//spilt url by domain
 		urls := strings.Split(links, URL)
 		splittedUrls := strings.Split(urls[1], "/")
 		for i, v := range splittedUrls {
