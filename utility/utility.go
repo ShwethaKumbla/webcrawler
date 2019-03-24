@@ -1,7 +1,6 @@
 package utility
 
 import (
-	"encoding/json"
 	"log"
 	"os"
 	"strings"
@@ -11,28 +10,20 @@ var (
 	Log *log.Logger
 )
 
-type Configuration struct {
-	Port string
-}
-
-func ReadConfig(filePath string) *Configuration {
-
-	file, _ := os.Open(filePath)
-	defer file.Close()
-
-	decoder := json.NewDecoder(file)
-	configuration := Configuration{}
-	err := decoder.Decode(&configuration)
-
+//NewLog: function which enables the logging
+func NewLog(logPath string) error {
+	file, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 	if err != nil {
-		log.Println("error while parsing the config:", err)
-		return nil
+		log.Println("error while opening the log file", err)
+		return err
 	}
+	Log = log.New(file, "", log.LstdFlags|log.Lshortfile)
+	Log.SetOutput(file)
 
-	return &configuration
-
+	return nil
 }
 
+//ResolveRelative if the url domain matches with the baseurl then it returns true
 func ResolveRelative(baseURL string, href string) bool {
 
 	if strings.HasPrefix(href, baseURL) {
@@ -40,15 +31,4 @@ func ResolveRelative(baseURL string, href string) bool {
 	}
 
 	return false
-}
-
-//NewLog: function which enables the logging
-func NewLog(logPath string) {
-	file, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
-	if err != nil {
-		log.Fatal("error while opening the log file", err)
-	}
-	Log = log.New(file, "", log.LstdFlags|log.Lshortfile)
-	Log.SetOutput(file)
-
 }

@@ -8,6 +8,7 @@ import (
 	"os"
 )
 
+//flags which are accepted from command line
 var (
 	logPath = flag.String("logpath", "crawler.log", "Log Path")
 	URL     = flag.String("url", "", "provide url path")
@@ -18,7 +19,11 @@ func main() {
 
 	flag.Parse()
 
-	utility.NewLog(*logPath)
+	err := utility.NewLog(*logPath)
+	if err != nil {
+		fmt.Println("error while creating the log file", err)
+		os.Exit(1)
+	}
 
 	if *URL == "" {
 		utility.Log.Println("Please specify the URL and depth ")
