@@ -20,7 +20,7 @@ build:
 crawl:
 
     # inside the repo
-    $ ./web-crawler -u <url> -depth 2
+    $ ./webcrawler -u <url> -depth 2
        
        - here depth is to provide the depth to traverse given url 
 
