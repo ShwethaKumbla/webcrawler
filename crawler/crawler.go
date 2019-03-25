@@ -1,9 +1,9 @@
 package crawler
 
 import (
+	"github.com/ShwethaKumbla/webcrawler/utility"
 	"github.com/disiqueira/gotree"
 	"github.com/gocolly/colly"
-	"github.com/webcrawler/utility"
 	"strings"
 )
 

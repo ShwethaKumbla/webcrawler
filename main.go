@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/webcrawler/crawler"
-	"github.com/webcrawler/utility"
+	"github.com/ShwethaKumbla/webcrawler/crawler"
+	"github.com/ShwethaKumbla/webcrawler/utility"
 	"os"
 )
 

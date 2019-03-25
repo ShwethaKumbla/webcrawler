@@ -1,9 +1,9 @@
 package crawler
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
-	"fmt"
 )
 
 func TestCrawlURLS(t *testing.T) {
