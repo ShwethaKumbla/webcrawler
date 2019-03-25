@@ -27,7 +27,7 @@ crawl:
 example:
 
     # inside the repo
-    $ ./web-crawler -u https://www.redhat.com -depth 3
+    $ ./webcrawler -u https://www.redhat.com -depth 3
   
 
    #### Using Docker.
