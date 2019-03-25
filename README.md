@@ -1,16 +1,34 @@
 
 ### Simple Web Crawler Tool
 
-## What it is ?
   Crawls a single domain, printing out a list of links for each new page that it finds.
 
 ### Instructions:
-  1. git clone https://github.com/ShwethaKumbla/webcrawler.git
-  2. Run go get
-  3. Run as below
-     go run main.go -url https://www.redhat.com -dept=2.
-     
-           - here depth is to provide the depth to traverse given url
+
+Clone the repo into $GOPATH/src and do the following:
+
+get deps:
+
+     # inside the repo
+     $ go get 
+   
+build:
+
+    # inside the repo
+    $ go build
+   
+crawl:
+
+    # inside the repo
+    $ ./web-crawler -u <url> -depth 2
+       
+       - here depth is to provide the depth to traverse given url 
+
+example:
+
+    # inside the repo
+    $ ./web-crawler -u https://www.redhat.com -depth 3
+  
 
    #### Using Docker.
    1.  Create docker image using following command.
