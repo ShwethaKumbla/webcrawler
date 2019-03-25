@@ -1,14 +1,16 @@
-# webcrawler
 
 ### Simple Web Crawler Tool
 
 ## What it is ?
-  A web crawler is a program that visits Web sites and reads their pages and other information in order to create entries for a search engine index.
+  Crawls a single domain, printing out a list of links for each new page that it finds.
 
 ### Instructions:
   1. git clone https://github.com/ShwethaKumbla/webcrawler.git
   2. Run go get
-  3. Go run main.go -url https://www.redhat.com -dept=2
+  3. Run as below
+     go run main.go -url https://www.redhat.com -dept=2.
+     
+           - here depth is to provide the depth to traverse given url
 
    #### Using Docker.
    1.  Create docker image using following command.
@@ -28,7 +30,7 @@
 
 ## Flow Diagram
 
- ![](images/flowchart.png)    
+ ![](images/flowchart_wc.png)    
  
 ### View of sitemap
 
