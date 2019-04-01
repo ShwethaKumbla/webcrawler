@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
-	"github.com/ShwethaKumbla/mywebcrawler/crawler"
+	"github.com/ShwethaKumbla/webcrawler/crawler"
 	"net/http"
 	"sync"
 	//"github.com/ShwethaKumbla/mywebcrawler/helper"
