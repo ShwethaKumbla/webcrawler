@@ -5,7 +5,6 @@ import (
 	"github.com/ShwethaKumbla/webcrawler/crawler"
 	"net/http"
 	"sync"
-	//"github.com/ShwethaKumbla/mywebcrawler/helper"
 	"fmt"
 )
 

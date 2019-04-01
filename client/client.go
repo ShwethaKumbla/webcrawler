@@ -28,6 +28,7 @@ func main() {
 	URLTree, err := crawl(*URL)
 	if err != nil {
 		log.Println("error while getting the url details", err)
+		return
 	}
 
 	fmt.Print(URLTree.Print())

@@ -12,38 +12,40 @@ get deps:
      # inside the repo
      $ go get 
    
-build:
+build server:
 
     # inside the repo
-    $ go build
+    $ go build -o webcrawler main.go
    
-crawl:
+Run server:
 
     # inside the repo
-    $ ./webcrawler -u <url> -depth 2
-       
-       - here depth is to provide the depth to traverse given url 
+    $ ./webcrawler
+
+Run client:
+
+     # go run client/client.go -url <url>
 
 example:
 
     # inside the repo
-    $ ./webcrawler -u https://www.redhat.com -depth 3
+    $ go run client/client.go -u https://www.redhat.com
   
 
    #### Using Docker.
    1.  Create docker image using following command.
    
             Docker build -t webcrawler:tag .
-   2. Run
+   2. Run the server
    
-       docker run --rm -ti webcrawler:tag -url https://stackoverflow.com
+       docker run --rm -ti webcrawler:tag
       
        OR
    1. pull image from my registry and run
    
            docker pull amydocker/webcrawler:v2.0
            
-           docker run --rm -ti amydocker/webcrawler:v2.0 -url https://www.redhat.com
+           docker run --rm -ti amydocker/webcrawler:v2.0
 
 
 ## Flow Diagram
