@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ShwethaKumbla/mywebcrawler/controllers"
+	"github.com/ShwethaKumbla/webcrawler/controllers"
 	"log"
 	"net/http"
 )
