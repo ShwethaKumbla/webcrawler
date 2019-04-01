@@ -67,7 +67,7 @@ func crawl(url string) (gotree.Tree, error) {
 	root := gotree.New(url)
 
 	for links, _ := range obtainedUrls {
-		//splitt url by domain
+		//split url by domain
 		urls := strings.Split(links, url)
 		splittedUrls := strings.Split(urls[1], "/")
 		for i, v := range splittedUrls {

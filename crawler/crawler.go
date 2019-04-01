@@ -33,6 +33,7 @@ func (crawler *Crawler) Start() {
 
 }
 
+//isVisited check if the url is already visited
 func (crawler *Crawler) isVisited(url string) bool {
 	//keep track of visited links
 	crawler.Lock.RLock()
@@ -41,15 +42,16 @@ func (crawler *Crawler) isVisited(url string) bool {
 
 }
 
+//visited while visiting the url make visited as true
 func (crawler *Crawler) visited(url string) {
-	////keep track of visited links
+	//keep track of visited links
 	crawler.Lock.Lock()
 	defer crawler.Lock.Unlock()
 	crawler.VisitedUrls[url] = true
 
 }
 
-//visit each links
+//visit each links on the page
 func (crawler *Crawler) visitLinks(url string) {
 
 	defer crawler.Done()
@@ -60,10 +62,8 @@ func (crawler *Crawler) visitLinks(url string) {
 		return
 	}
 
-	//fmt.Println("res is nil got response for url")
 	if res.StatusCode != 200 {
 		fmt.Println("error while getting the page details", res.StatusCode)
-		//	crawler.Wg.Done()
 		return
 	}
 
@@ -71,12 +71,10 @@ func (crawler *Crawler) visitLinks(url string) {
 	b, err := html.Parse(res.Body)
 	if err != nil {
 		fmt.Println("error while parsing", err)
-		//crawler.Wg.Done()
 		return
 	}
 
 	res.Body.Close()
-	//crawler.Wg.Done()
 
 	fmt.Println("visited", url)
 
@@ -91,9 +89,7 @@ func (crawler *Crawler) findAllLinks(n *html.Node) {
 			if a.Key == "href" {
 				link := crawler.resolveToAbsoluteURL(a.Val)
 				if strings.Contains(link, crawler.Host) {
-					//if link != "" && !crawler.isVisited(link) {
 					crawler.VisitURL(link)
-					//}
 				}
 			}
 		}
@@ -107,12 +103,6 @@ func (crawler *Crawler) findAllLinks(n *html.Node) {
 
 }
 
-//func (c *Crawler) addToVisit(value string) {
-//	c.Lock.Lock()
-//	c.VisitedUrls[value] = false
-//	c.Lock.Unlock()
-//
-//}
 
 //send url to channel as it is yet to be visited
 func (crawler *Crawler) VisitURL(href string) {
@@ -142,31 +132,12 @@ func (crawler *Crawler) resolveToAbsoluteURL(href string) string {
 	return ""
 }
 
-// visited returns true if the link is already visited
-//func (crawler *Crawler)alreadyVisted(value string) bool {
-//
-//	crawler.Lock.RLock()
-//	defer crawler.Lock.RUnlock()
-//	_, ok := crawler.VisitedUrls[value]
-//
-//	return ok
-//
-//}
-
-//// http get request to the urls
-//func getRequest(url string) (*http.Response, error) {
-//	response, err := http.Get(url)
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	return response, err
-//}
-
+//Stop the channel
 func (crawler *Crawler) Stop() {
 	close(crawler.FilteredUrls)
 }
 
+//get base url
 func (crawler *Crawler) getBaseURL() string {
 	baseURL, err := url.Parse(crawler.Host)
 	if err != nil {

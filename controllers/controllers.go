@@ -24,16 +24,16 @@ func CrawlURLS(w http.ResponseWriter, r *http.Request) {
 		FilteredUrls: make(chan string, 10),
 		VisitedUrls:  make(map[string]bool),
 		Lock:         new(sync.RWMutex),
-		//Wg: helper.NewWaitGroup(10),
+
 	}
 
 	c.Start()
 
-	//c.Add(1)
-	//c.FilteredUrls <- c.Host
 	c.VisitURL(c.Host)
 	c.Wait()
 	fmt.Println("==========THE END=============")
+
+	//close the channel
 	c.Stop()
 
 	w.WriteHeader(http.StatusOK)

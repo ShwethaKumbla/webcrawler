@@ -10,5 +10,7 @@ func main() {
 
 	http.HandleFunc("/crawl", controllers.CrawlURLS)
 
+	log.Println("listening on :8090")
+
 	log.Fatal(http.ListenAndServe(":8090", nil))
 }
