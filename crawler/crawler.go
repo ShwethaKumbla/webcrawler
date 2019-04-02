@@ -70,7 +70,7 @@ func (crawler *Crawler) visitLinks(url string) {
 	//parse the html page
 	b, err := html.Parse(res.Body)
 	if err != nil {
-		fmt.Println("error while parsing", err)
+		fmt.Println("error while parsing the html page", err)
 		return
 	}
 
