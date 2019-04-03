@@ -1,11 +1,10 @@
 package crawler
 
 import (
-	"testing"
-	"sync"
-	"reflect"
 	"github.com/stretchr/testify/assert"
-	"io"
+	"reflect"
+	"sync"
+	"testing"
 )
 
 func TestCrawler_Start(t *testing.T) {
@@ -14,7 +13,6 @@ func TestCrawler_Start(t *testing.T) {
 		FilteredUrls: make(chan string, 10),
 		VisitedUrls:  make(map[string]bool),
 		Lock:         new(sync.RWMutex),
-
 	}
 
 	// call start
@@ -24,16 +22,16 @@ func TestCrawler_Start(t *testing.T) {
 	c.Stop()
 
 	var expectedOutput Crawler
-	expectedOutput.VisitedUrls = map[string]bool{"https://access.redhat.com/support/contact":true,
-	"https://access.redhat.com/support/contact/":true,"https://access.redhat.com/support/contact/Sales/":true,
-	"https://access.redhat.com/support/contact/customerService/":true,
-	"https://access.redhat.com/support/contact/technicalSupport/":true}
+	expectedOutput.VisitedUrls = map[string]bool{"https://access.redhat.com/support/contact": true,
+		"https://access.redhat.com/support/contact/": true, "https://access.redhat.com/support/contact/Sales/": true,
+		"https://access.redhat.com/support/contact/customerService/":  true,
+		"https://access.redhat.com/support/contact/technicalSupport/": true}
 
 	eq := reflect.DeepEqual(c.VisitedUrls, expectedOutput.VisitedUrls)
 	if eq {
 		assert.Equal(t, expectedOutput.VisitedUrls, c.VisitedUrls)
 	} else {
-		assert.NotEqual(t,expectedOutput.VisitedUrls, c.VisitedUrls)
+		assert.NotEqual(t, expectedOutput.VisitedUrls, c.VisitedUrls)
 	}
 
 }
@@ -44,7 +42,6 @@ func TestCrawler_StartError(t *testing.T) {
 		FilteredUrls: make(chan string, 10),
 		VisitedUrls:  make(map[string]bool),
 		Lock:         new(sync.RWMutex),
-
 	}
 
 	c.Add(1)
@@ -55,4 +52,3 @@ func TestCrawler_StartError(t *testing.T) {
 	assert.Empty(t, c.VisitedUrls)
 
 }
-

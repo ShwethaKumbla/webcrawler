@@ -103,7 +103,6 @@ func (crawler *Crawler) findAllLinks(n *html.Node) {
 
 }
 
-
 //send url to channel as it is yet to be visited
 func (crawler *Crawler) VisitURL(href string) {
 	if href != "" && !crawler.isVisited(href) {

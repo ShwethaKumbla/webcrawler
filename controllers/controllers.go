@@ -2,10 +2,10 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/ShwethaKumbla/webcrawler/crawler"
 	"net/http"
 	"sync"
-	"fmt"
 )
 
 func CrawlURLS(w http.ResponseWriter, r *http.Request) {
@@ -23,13 +23,12 @@ func CrawlURLS(w http.ResponseWriter, r *http.Request) {
 		FilteredUrls: make(chan string, 10),
 		VisitedUrls:  make(map[string]bool),
 		Lock:         new(sync.RWMutex),
-
 	}
 
 	c.Start()
-
 	c.VisitURL(c.Host)
 	c.Wait()
+
 	fmt.Println("==========THE END=============")
 
 	//close the channel

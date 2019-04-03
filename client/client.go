@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"github.com/disiqueira/gotree"
@@ -38,20 +39,23 @@ func main() {
 func crawl(url string) (gotree.Tree, error) {
 
 	var obtainedUrls = make(map[string]bool)
+
 	resp, err := http.Get(serverUrl + "/crawl?url=" + url)
 	if err != nil {
 		log.Println("error while getting the url details", err)
 		return nil, err
 	}
 
-	fmt.Println(resp.Body)
+	if resp.StatusCode != 200 {
+		log.Println("error while getting the url details", err)
+		return nil, errors.New("error while getting the response from the server" + string(resp.StatusCode))
+	}
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Println("error while reading the response body", err)
 		return nil, err
 	}
-
-	//fmt.Println(string(body))
 
 	err = json.Unmarshal(body, &obtainedUrls)
 	if err != nil {
