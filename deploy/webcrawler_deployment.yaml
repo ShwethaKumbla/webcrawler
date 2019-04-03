@@ -1,0 +1,47 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: webcrawler
+  namespace: webcrawler
+  labels:
+    app: webcrawler
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webcrawler
+    spec:
+      containers:
+      - image: amydocker/webcrawler:1.0
+        name: webcrawler
+        ports:
+        - containerPort: 8090
+          name: webcrawler-sb
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8090
+            httpHeaders:
+            - name: Accept
+              value: application/json
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8090
+            httpHeaders:
+            - name: Accept
+              value: application/json
+          initialDelaySeconds: 180
+          periodSeconds: 30
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1000Mi
+          requests:
+            cpu: 500m
+            memory: 1000Mi

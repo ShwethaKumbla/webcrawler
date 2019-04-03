@@ -14,15 +14,15 @@ import (
 )
 
 var (
-	URL       = flag.String("url", "https://www.redhat.com", "provide url path")
-	serverUrl = "http://localhost:8090"
+	URL = flag.String("url", "https://www.redhat.com", "provide url path")
+	//serverUrl = "http://192.168.99.100:31711"
 )
 
 func main() {
 	flag.Parse()
 
 	if *URL == "" {
-		log.Println("Please specify the URL and depth ")
+		log.Println("Please specify the URL ")
 		os.Exit(1)
 	}
 
@@ -36,11 +36,17 @@ func main() {
 
 }
 
+//crawl which calls the server api to get the links
+//and displays it in the tree structure
 func crawl(url string) (gotree.Tree, error) {
+
+	//get the server ip and port from environment variable
+	serverUrl := os.Getenv("SERVER_URL")
+	port := os.Getenv("SERVER_PORT")
 
 	var obtainedUrls = make(map[string]bool)
 
-	resp, err := http.Get(serverUrl + "/crawl?url=" + url)
+	resp, err := http.Get("http://" + serverUrl + ":" + port + "/crawl?url=" + url)
 	if err != nil {
 		log.Println("error while getting the url details", err)
 		return nil, err

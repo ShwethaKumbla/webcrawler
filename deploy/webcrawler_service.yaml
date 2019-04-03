@@ -1,0 +1,20 @@
+metadata:
+  labels:
+    name: webcrawler
+    role: service
+  name: webcrawler
+  namespace: webcrawler
+spec:
+  clusterIP: 10.105.173.113
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31711
+    port: 8090
+    protocol: TCP
+    targetPort: 8090
+  selector:
+    app: webcrawler
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
