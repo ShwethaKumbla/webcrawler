@@ -31,7 +31,12 @@ func TestCrawlErrorURLConnectionRefused(t *testing.T) {
 func TestCrawl(t *testing.T) {
 	tree, err := crawl("https://access.redhat.com/support/contact")
 	assert.NoError(t, err)
-	assert.NotEmpty(t, tree)
-	fmt.Println(tree.Print())
+	if assert.NotNil(t, tree) {
+		fmt.Println(tree.Print())
+	} else {
+		assert.Nil(t, tree)
+	}
+
+
 
 }
