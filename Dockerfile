@@ -1,6 +1,6 @@
 FROM golang:1.12.1
 ENV GOBIN=/go/bin
-RUN mkdir -p /go/src/github.com/ShwethaKumblawebcrawler
+RUN mkdir -p /go/src/github.com/ShwethaKumbla/webcrawler
 WORKDIR /go/src/github.com/ShwethaKumbla/webcrawler
 COPY . /go/src/github.com/ShwethaKumbla/webcrawler/
 RUN go get

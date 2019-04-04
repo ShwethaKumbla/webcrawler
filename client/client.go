@@ -15,7 +15,7 @@ import (
 
 var (
 	URL = flag.String("url", "https://www.redhat.com", "provide url path")
-	//serverUrl = "http://192.168.99.100:31711"
+	//serverUrl = "http://192.168.99.100:30080"
 )
 
 func main() {
