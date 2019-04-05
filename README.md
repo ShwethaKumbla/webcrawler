@@ -43,9 +43,9 @@ example:
        OR
    1. pull image from my registry and run
    
-           docker pull amydocker/webcrawler:v2.0
+           docker pull amydocker/webcrawler:1.0
            
-           docker run --rm -ti amydocker/webcrawler:v2.0
+           docker run --rm -ti amydocker/webcrawler:1.0
 
 
 ## Flow Diagram
