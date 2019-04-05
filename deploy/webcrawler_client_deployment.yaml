@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: webcrawler-client
+  labels:
+    app: webcrawler-client
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webcrawler-client
+    spec:
+      containers:
+      - image: amydocker/webcrawler-client:1.0
+        name: webcrawler-client
+        env:
+        - name: "SERVER_URL"
+          value: "webcrawler"
+        - name: "SERVER_PORT"
+          value: "8090"
+          

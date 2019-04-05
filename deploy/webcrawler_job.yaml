@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    run: crawler
+  name: crawler
+  namespace: default
+spec:
+  backoffLimit: 6
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        job-name: crawler
+        run: crawler
+    spec:
+      containers:
+      - args:
+        - http://www.gamesyscorporate.com
+        image: amydocker/wecrawler:multicon
+        imagePullPolicy: IfNotPresent
+        name: crawler
+        resources: {}
+        env:
+        - name: "SERVER_URL"
+          value: "localhost"
+        - name: "SERVER_PORT"
+          value: "8090"
+      restartPolicy: Never    
